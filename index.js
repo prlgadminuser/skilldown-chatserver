@@ -156,7 +156,24 @@ server.on('upgrade', (request, socket, head) => {
 });
 
 const PORT = process.env.PORT || 3000;
-const allowedOrigins = ["tw-editor://."]; // Add your allowed origins
+const allowedOrigins = [
+   "https://uploads.ungrounded.net",
+  "https://slcount.netlify.app",
+  "https://s-r.netlify.app",
+  "https://serve.gamejolt.net",
+  "null",
+  "tw-editor://.",
+  "http://serve.gamejolt.net",
+  "https://www.newgrounds.com/portal/view/5561763",
+  "https://www.newgrounds.com/projects/games/5561763/preview",
+  "https://prod-dpgames.crazygames.com",
+  "https://crazygames.com",
+   "https://crazygames.com/game/skilled-royale",
+   "https://html-classic.itch.zone",
+   "https://turbowarp.org",
+   "https://s-ri0p-delgae.netlify.app",
+];
+
 
 server.listen(PORT, () => {
   console.log(`Server is listening on port ${PORT}`);
