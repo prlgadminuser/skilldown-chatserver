@@ -29,7 +29,6 @@ async function joinGlobalChat(ws, token) {
   return new Promise(async (resolve, reject) => {
     try {
       const expectedOrigin = 'tw-editor://.';
-      console.log("svs")
       const response = await axios.get(`https://liquemgames-api.netlify.app/verify-token/${token}`, {
         headers: {
           Origin: expectedOrigin,
@@ -46,7 +45,7 @@ async function joinGlobalChat(ws, token) {
           return;
         }
 
-        globalChatPlayers.set(playerId, { ws });
+        //globalChatPlayers.set(playerId, { ws });
 
         // Send the entire chat history to the new connection
         ws.send(JSON.stringify({ type: 'chat', messages: chatHistory }));
@@ -111,7 +110,6 @@ function broadcastGlobal(playerId, message) {
 wss.on('connection', (ws, req) => {
   const token = req.url.slice(1);
   const ip = req.headers['true-client-ip'] || req.headers['x-forwarded-for']
-console.log("sv")
 
   console.log(req.headers.origin)
   // Check if the request origin is allowed
