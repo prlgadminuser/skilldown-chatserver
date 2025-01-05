@@ -51,17 +51,12 @@ const allowedOrigins = [
 
 async function joinGlobalChat(ws, token) {
   try {
-    const expectedOrigin = 'tw-editor://.';
-    const response = await axios.get(`https://liquemgames-api.netlify.app/verify-token/${token}`, {
-      headers: {
-        Origin: expectedOrigin,
-      },
-    });
+      const decodedToken = jwt.verify(token, tokenkey);
 
-    const playerId = response.data.message;
+    const playerId = decodedToken;
     
     // If token is invalid or playerId is not returned
-    if (!playerId) {
+    if (!playerId || !token) {
       ws.close(4001, 'Invalid token');
       return null;
     }
