@@ -2,6 +2,7 @@ const WebSocket = require('ws');
 const http = require('http');
 const axios = require('axios');
 const Limiter = require('limiter').RateLimiter;
+const jwt = require("jsonwebtoken");
 
 const server = http.createServer();
 const wss = new WebSocket.Server({ noServer: true });
@@ -49,17 +50,14 @@ const allowedOrigins = [
 
 async function joinGlobalChat(ws, token) {
   try {
-    const expectedOrigin = 'tw-editor://.';
-    const response = await axios.get(`https://liquemgames-api.netlify.app/verify-token/${token}`, {
-      headers: {
-        Origin: expectedOrigin,
-      },
-    });
+    const decodedToken = jwt.verify(token, tokenkey);
 
-    const playerId = response.data.message;
+    req.user = decodedToken;
+
+    const playerId = decodedToken;
     
     // If token is invalid or playerId is not returned
-    if (!playerId) {
+    if (!playerId || !token) {
       ws.close(4001, 'Invalid token');
       return null;
     }
