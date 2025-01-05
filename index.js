@@ -53,8 +53,6 @@ async function joinGlobalChat(ws, token) {
   try {
     const decodedToken = jwt.verify(token, tokenkey);
 
-    req.user = decodedToken;
-
     const playerId = decodedToken;
     
     // If token is invalid or playerId is not returned
