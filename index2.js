@@ -14,7 +14,7 @@ const maxMessages = 4;
 
 const connectionRate = 1;
 const connectionBurst = 1;
-const connectionInterval = 5000; // 5 seconds
+const connectionInterval = 2000; // 5 seconds
 const tokenBucket = new Limiter({
   tokensPerInterval: connectionRate,
   interval: connectionInterval,
