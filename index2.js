@@ -82,7 +82,7 @@ async function joinGlobalChat(ws, token) {
       message: `${playerId} has joined the chat.`,
     };
 
-    chatHistory.push(systemMessage);
+    //chatHistory.push(systemMessage);
 
     // Trim chat history to the last 'maxMessages' messages
     if (chatHistory.length > maxMessages) {
