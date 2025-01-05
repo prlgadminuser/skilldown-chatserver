@@ -2,6 +2,8 @@ const WebSocket = require('ws');
 const http = require('http');
 const axios = require('axios');
 const Limiter = require('limiter').RateLimiter;
+const jwt = require("jsonwebtoken");
+const tokenkey = "d8ce40604d359eeb9f2bff31beca4b4b"
 
 const server = http.createServer();
 const wss = new WebSocket.Server({ noServer: true });
