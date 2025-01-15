@@ -91,7 +91,7 @@ async function joinGlobalChat(ws, token) {
 
     // Broadcast the updated chat history to all connected players
     for (const player of globalChatPlayers.values()) {
-      player.ws.send(JSON.stringify({ type: 'chat', messages: chatHistory, connections: globalChatPlayers.size }));
+      player.ws.send(JSON.stringify({ type: 'chat', msg: chatHistory, ccu: globalChatPlayers.size }));
     }
 
     return playerId;
@@ -139,7 +139,7 @@ function broadcastGlobal(playerId, message) {
 
   // Broadcast the updated chat history to all connected players
   for (const player of globalChatPlayers.values()) {
-    player.ws.send(JSON.stringify({ type: 'chat', messages: chatHistory, connections: globalChatPlayers.size }));
+    player.ws.send(JSON.stringify({ type: 'chat', msg: chatHistory, ccu: globalChatPlayers.size }));
   }
 }
 
