@@ -71,15 +71,15 @@ async function joinGlobalChat(ws, token) {
     globalChatPlayers.set(playerId, { ws });
 
     // Send the entire chat history to the new connection
-    ws.send(JSON.stringify({ type: 'chat', messages: chatHistory, connections: globalChatPlayers.size }));
+    ws.send(JSON.stringify({ type: 'chat', msg: chatHistory, ccu: globalChatPlayers.size }));
 
     // Broadcast a system message notifying all users about the new participant
     const timestamp = new Date().toLocaleTimeString();
     const systemMessage = {
       id: chatHistory.length + 1,
-      timestamp: timestamp,
-      playerId: 'system',
-      message: `${playerId} has joined the chat.`,
+      t: timestamp,
+      p: 'system',
+      m: `${playerId} has joined the chat.`,
     };
 
     //chatHistory.push(systemMessage);
@@ -125,9 +125,9 @@ function broadcastGlobal(playerId, message) {
 
   const newMessage = {
     id: chatHistory.length + 1,
-    timestamp: timestamp,
-    playerId: playerId,
-    message: filteredMessage,
+    t: timestamp,
+    p: playerId,
+    m: filteredMessage,
   };
 
   chatHistory.push(newMessage);
