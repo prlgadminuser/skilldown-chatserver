@@ -71,7 +71,7 @@ async function joinGlobalChat(ws, token) {
     globalChatPlayers.set(playerId, { ws });
 
     // Send the entire chat history to the new connection
-    ws.send(JSON.stringify({ type: 'chat', messages: chatHistory, connections: globalChatPlayers.size }));
+    ws.send(JSON.stringify({ type: 'chat', msg: chatHistory, ccu: globalChatPlayers.size }));
 
     return playerId;
   } catch (error) {
@@ -104,9 +104,9 @@ function broadcastGlobal(playerId, message) {
 
   const newMessage = {
     id: chatHistory.length + 1,
-    timestamp: timestamp,
-    playerId: playerId,
-    message: filteredMessage,
+    t: timestamp,
+    p: playerId,
+    m: filteredMessage,
   };
 
   chatHistory.push(newMessage);
